@@ -39,11 +39,9 @@
 
 from __future__ import absolute_import
 
-import os, sys
-from . import pYINmain
+from src import pYINmain
 import essentia.standard as ess
-import numpy as np
-from YinUtil import RMS
+
 
 def pYINPtNote(filename1,fs=44100,frameSize=2048,hopSize=256):
 

@@ -42,10 +42,8 @@ dir = os.path.dirname(os.path.realpath(__file__))
 srcpath = dir+'/src'
 sys.path.append(srcpath)
 
-import pYINmain
+from pypyin import pYINmain
 import essentia.standard as ess
-import numpy as np
-from YinUtil import RMS
 
 if __name__ == "__main__":
 

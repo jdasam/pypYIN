@@ -41,7 +41,7 @@ from __future__ import absolute_import
 
 import numpy as np
 from math import *
-from . import YinUtil
+from src import YinUtil
 
 class Yin(object):
 
