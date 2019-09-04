@@ -37,8 +37,10 @@
  * Music Notation and Representation, 2015.
 '''
 
-from MonoNoteHMM import MonoNoteHMM
-from MonoNoteParameters import MonoNoteParameters
+from __future__ import absolute_import
+
+from .MonoNoteHMM import MonoNoteHMM
+from .MonoNoteParameters import MonoNoteParameters
 import numpy as np
 import time
 

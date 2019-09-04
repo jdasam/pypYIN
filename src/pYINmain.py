@@ -37,13 +37,15 @@
  * Music Notation and Representation, 2015.
 '''
 
+from __future__ import absolute_import
+
 import numpy as np
 import copy
 from math import *
-from Yin import *
-from YinUtil import RMS
-from MonoPitch import MonoPitch
-from MonoNote import MonoNote
+from .Yin import *
+from .YinUtil import RMS
+from .MonoPitch import MonoPitch
+from .MonoNote import MonoNote
 
 class Feature(object):
     def __init__(self):

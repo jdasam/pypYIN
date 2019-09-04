@@ -37,8 +37,10 @@
  * Music Notation and Representation, 2015.
 '''
 
+from __future__ import absolute_import
+
 import os, sys
-import pYINmain
+from . import pYINmain
 import essentia.standard as ess
 import numpy as np
 from YinUtil import RMS

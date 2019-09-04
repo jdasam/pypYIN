@@ -37,9 +37,11 @@
  * Music Notation and Representation, 2015.
 '''
 
+from __future__ import absolute_import
+
 import numpy as np
 from math import *
-import YinUtil
+from . import YinUtil
 
 class Yin(object):
 

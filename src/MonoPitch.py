@@ -37,7 +37,9 @@
  * Music Notation and Representation, 2015.
 '''
 
-from MonoPitchHMM import MonoPitchHMM
+from __future__ import absolute_import
+
+from .MonoPitchHMM import MonoPitchHMM
 import numpy as np
 from math import *
 

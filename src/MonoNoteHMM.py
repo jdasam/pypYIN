@@ -37,9 +37,11 @@
  * Music Notation and Representation, 2015.
 '''
 
+from __future__ import absolute_import
+
 import numpy as np
-from SparseHMM import SparseHMM
-from MonoNoteParameters import MonoNoteParameters
+from .SparseHMM import SparseHMM
+from .MonoNoteParameters import MonoNoteParameters
 from math import *
 from scipy.stats import norm
 
