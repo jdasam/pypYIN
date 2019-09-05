@@ -41,8 +41,8 @@ from __future__ import absolute_import
 
 import numpy as np
 import copy
-from math import *
-from .Yin import *
+
+from .Yin import Yin
 from .YinUtil import RMS
 from .MonoPitch import MonoPitch
 from .MonoNote import MonoNote
@@ -138,7 +138,7 @@ class PyinMain(object):
         tempPitchProb = np.array([], dtype=np.float32)
         firstStack = False
         for iCandidate in range(yo.freqProb.shape[0]):
-            tempPitch = 12.0 * log(yo.freqProb[iCandidate][0]/440.0)/log(2.0) + 69.0
+            tempPitch = 12.0 * np.log(yo.freqProb[iCandidate][0]/440.0)/log(2.0) + 69.0
             if not isLowAmplitude:
                 if firstStack == False:
                     tempPitchProb = np.array([np.array([tempPitch, yo.freqProb[iCandidate][1]], dtype=np.float64),])
@@ -234,7 +234,7 @@ class PyinMain(object):
         for iFrame in range(len(mpOut)):
             temp = []
             if mpOut[iFrame] > 0:  # negative value: silence
-                tempPitch = 12 * log(mpOut[iFrame]/440.0)/log(2.0) + 69
+                tempPitch = 12 * np.log(mpOut[iFrame]/440.0)/np.log(2.0) + 69
                 temp += [[tempPitch, 0.9]]
             smoothedPitch += [temp]
 

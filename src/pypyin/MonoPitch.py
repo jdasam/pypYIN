@@ -41,7 +41,6 @@ from __future__ import absolute_import
 
 from .MonoPitchHMM import MonoPitchHMM
 import numpy as np
-from math import *
 
 class MonoPitch(object):
     def __init__(self):
@@ -67,7 +66,7 @@ class MonoPitch(object):
                 # have had to rethink the interface of that method.
                 for iPitch in range(len(pitchProb[iFrame])):
                     freq = 440. * pow(2.0, (pitchProb[iFrame][iPitch][0] - 69)/12.0)
-                    dist = fabs(hmmFreq-freq)
+                    dist = np.fabs(hmmFreq-freq)
                     if dist < leastDist:
                         leastDist = dist
                         bestFreq = freq

@@ -40,8 +40,7 @@
 from __future__ import absolute_import
 
 import numpy as np
-from math import *
-from src import YinUtil
+from . import YinUtil
 
 class Yin(object):
 
@@ -83,7 +82,7 @@ class Yin(object):
         peakProbability = YinUtil.yinProb(yinBuffer, self.m_threshDistr, self.m_yinBufferSize, 0, 0)
 
         # calculate overall "probability" from peak probability, overall "probability" probSum seems never be used
-        rms = sqrt(YinUtil.sumSquare(input, 0, self.m_yinBufferSize)/self.m_yinBufferSize)
+        rms = np.sqrt(YinUtil.sumSquare(input, 0, self.m_yinBufferSize)/self.m_yinBufferSize)
         yo = Yin.YinOutput(0.0, 0.0, rms)
 
         firstStack = False

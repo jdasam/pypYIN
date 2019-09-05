@@ -42,7 +42,6 @@ from __future__ import absolute_import
 import numpy as np
 from .SparseHMM import SparseHMM
 from .MonoNoteParameters import MonoNoteParameters
-from math import *
 from scipy.stats import norm
 
 class MonoNoteHMM(SparseHMM):

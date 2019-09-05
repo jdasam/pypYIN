@@ -38,7 +38,6 @@
 '''
 
 import numpy as np
-from math import *
 
 class SparseHMM(object):
 

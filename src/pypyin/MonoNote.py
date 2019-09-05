@@ -40,9 +40,6 @@
 from __future__ import absolute_import
 
 from .MonoNoteHMM import MonoNoteHMM
-from .MonoNoteParameters import MonoNoteParameters
-import numpy as np
-import time
 
 
 class FrameOutput(object):
@@ -50,6 +47,7 @@ class FrameOutput(object):
         self.frameNumber = frameNumber
         self.pitch = pitch
         self.noteState = noteState
+
 
 class MonoNote(object):
 
@@ -65,9 +63,6 @@ class MonoNote(object):
         path, scale = self.hmm.decodeViterbi(obsProb)
 
         for iFrame in range(len(path)):
-            currPitch = -1.0
-            stateKind = 0
-
             currPitch = self.hmm.par.minPitch + (path[iFrame]/self.hmm.par.nSPP) * 1.0/self.hmm.par.nPPS
             stateKind = (path[iFrame]) % self.hmm.par.nSPP + 1
 

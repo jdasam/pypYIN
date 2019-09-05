@@ -39,7 +39,7 @@
 
 from __future__ import absolute_import
 
-from src import pYINmain
+from . import pYINmain
 import essentia.standard as ess
 
 

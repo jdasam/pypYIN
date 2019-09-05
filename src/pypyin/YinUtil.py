@@ -1,12 +1,9 @@
-from math import *
 import numpy as np
 
 def slowDifference(input, yinBufferSize):
 
     yinBuffer = np.zeros((yinBufferSize,), dtype=np.float64)
 
-    startPoint = 0
-    endPoint = 0
     for i in range(yinBufferSize):
         startPoint = yinBufferSize/2 - i/2
         endPoint = startPoint + yinBufferSize
@@ -208,6 +205,6 @@ def RMS(inputBuffers, blockSize):
     for i in range(blockSize):
         rms += inputBuffers[i] * inputBuffers[i]
     rms /= blockSize
-    rms = sqrt(rms)
+    rms = np.sqrt(rms)
 
     return rms

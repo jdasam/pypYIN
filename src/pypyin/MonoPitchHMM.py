@@ -40,7 +40,6 @@
 from __future__ import absolute_import
 
 from .SparseHMM import SparseHMM
-from math import *
 import numpy as np
 
 
@@ -72,7 +71,7 @@ class MonoPitchHMM(SparseHMM):
             d = 0
             oldd = 1000
             for iPitch in range(self.m_nPitch):
-                d = fabs(freq-self.m_freqs[iPitch])
+                d = np.fabs(freq-self.m_freqs[iPitch])
                 if oldd < d and iPitch > 0:
                     # previous bin must have been the closest
                     # when iPitch move far away from freq candidate
