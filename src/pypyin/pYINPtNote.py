@@ -59,7 +59,6 @@ def frame_generator(audio, frameSize, hopSize):
 
 
 def pYINPtNote(filename1, fs=44100, frameSize=2048, hopSize=256):
-
     '''
     Given filename, return pitchtrack and note transcription track
     :param filename1:
@@ -70,11 +69,11 @@ def pYINPtNote(filename1, fs=44100, frameSize=2048, hopSize=256):
     '''
     # initialise
     pYinInst = pYINmain.PyinMain()
-    pYinInst.initialise(channels = 1, inputSampleRate = fs, stepSize = hopSize, blockSize = frameSize,
-                   lowAmp = 0.25, onsetSensitivity = 0.7, pruneThresh = 0.1)
+    pYinInst.initialise(channels=1, inputSampleRate=fs, stepSize=hopSize, blockSize=frameSize,
+                        lowAmp=0.25, onsetSensitivity=0.7, pruneThresh=0.1)
 
     # frame-wise calculation
-    audio = librosa.load(filename1, fs)
+    audio, fs = librosa.load(filename1, fs, mono=True)
 
     # rms mean
     # rms = []
