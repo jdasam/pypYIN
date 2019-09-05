@@ -39,6 +39,8 @@
 
 from __future__ import absolute_import
 
+from operator import itemgetter
+
 import numpy as np
 from .SparseHMM import SparseHMM
 from .MonoNoteParameters import MonoNoteParameters
@@ -54,13 +56,11 @@ class MonoNoteHMM(SparseHMM):
     def calculatedObsProb(self, pitchProb):
         # pitchProb is a list of pairs (pitches and their probabilities)
 
-        nCandidate = len(pitchProb)
+        pitches = np.array(list(map(itemgetter(0), pitchProb)))
+        probabilities = np.array(list(map(itemgetter(1), pitchProb)))
 
         # what is the probability of pitched
-        pIsPitched = 0.0
-        for iCandidate in range(nCandidate):
-            # pIsPitched = pitchProb[iCandidate].second > pIsPitched ? pitchProb[iCandidate].second : pIsPitched;
-            pIsPitched += pitchProb[iCandidate][1]
+        pIsPitched = np.sum(probabilities, initial=0.0)
 
         # the pitched probability, check Ryynanen's paper
         pIsPitched = pIsPitched * (1-self.par.priorWeight) + self.par.priorPitchedProb * self.par.priorWeight
@@ -70,20 +70,21 @@ class MonoNoteHMM(SparseHMM):
         for i in range(self.par.n):
             if i % self.par.nSPP != 2:
                 # std::cerr << getMidiPitch(i) << std::endl;
-                tempProb = 0.0
-                if nCandidate > 0:
+                if pitches:
                     minDist = 10000.0
                     minDistProb = 0.0
                     minDistCandidate = 0
-                    for iCandidate in range(nCandidate):
-                        currDist = np.fabs(self.getMidiPitch(i)-pitchProb[iCandidate][0])
-                        if (currDist < minDist):
-                            minDist = currDist
-                            minDistProb = pitchProb[iCandidate][1]
-                            minDistCandidate = iCandidate
-                    tempProb = pow(minDistProb, self.par.yinTrust) * self.pitchDistr[i].pdf(pitchProb[minDistCandidate][0])
+
+                    dist = np.abs(self.getMidiPitch(i) - pitches)
+                    if np.min(dist) < minDist:
+                        minDistCandidate = np.argmin(dist)
+                        minDistProb = probabilities[minDistCandidate]
+
+                    tempProb = pow(minDistProb, self.par.yinTrust) * self.pitchDistr[i].pdf(pitches[minDistCandidate])
+
                 else:
                     tempProb = 1
+
                 tempProbSum += tempProb
                 out[i] = tempProb
 
