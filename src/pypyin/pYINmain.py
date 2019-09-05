@@ -120,10 +120,9 @@ class PyinMain(object):
     def process(self, inputBuffers):
 
         dInputBuffers = np.zeros((self.m_blockSize,), dtype=np.float64)
-        for i in range(self.m_blockSize):
-            dInputBuffers[i] = inputBuffers[i]
+        dInputBuffers[:inputBuffers.size] = inputBuffers
 
-        rms = RMS(inputBuffers, self.m_blockSize)
+        rms = RMS(inputBuffers)
 
         isLowAmplitude = rms < self.m_lowAmp
 
@@ -138,7 +137,7 @@ class PyinMain(object):
         tempPitchProb = np.array([], dtype=np.float32)
         firstStack = False
         for iCandidate in range(yo.freqProb.shape[0]):
-            tempPitch = 12.0 * np.log(yo.freqProb[iCandidate][0]/440.0)/log(2.0) + 69.0
+            tempPitch = 12.0 * np.log(yo.freqProb[iCandidate][0]/440.0)/np.log(2.0) + 69.0
             if not isLowAmplitude:
                 if firstStack == False:
                     tempPitchProb = np.array([np.array([tempPitch, yo.freqProb[iCandidate][1]], dtype=np.float64),])
