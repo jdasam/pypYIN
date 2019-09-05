@@ -76,7 +76,7 @@ class MonoNoteHMM(SparseHMM):
                     minDistProb = 0.0
                     minDistCandidate = 0
                     for iCandidate in range(nCandidate):
-                        currDist = fabs(self.getMidiPitch(i)-pitchProb[iCandidate][0])
+                        currDist = np.fabs(self.getMidiPitch(i)-pitchProb[iCandidate][0])
                         if (currDist < minDist):
                             minDist = currDist
                             minDistProb = pitchProb[iCandidate][1]
@@ -168,7 +168,7 @@ class MonoNoteHMM(SparseHMM):
             for jPitch in range(self.par.nS * self.par.nPPS):
                 fromPitch = iPitch
                 toPitch = jPitch
-                semitoneDistance = fabs(fromPitch - toPitch) * 1.0 / self.par.nPPS
+                semitoneDistance = np.fabs(fromPitch - toPitch) * 1.0 / self.par.nPPS
 
                 if semitoneDistance == 0 or \
                         (semitoneDistance > self.par.minSemitoneDistance and semitoneDistance < self.par.maxJump):
