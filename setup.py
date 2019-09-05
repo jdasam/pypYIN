@@ -5,7 +5,7 @@ if __name__ == '__main__':
         readme_contents = fh.read()
 
     setup(name='pypyin',
-          version='1.0',
+          version='1.1',
           author='Rong GONG',
           url='https://github.com/stefansjs/pypYIN',
 
