@@ -192,19 +192,11 @@ def parabolicInterpolation(yinBuffer, tau, yinBufferSize):
 
     return betterTau
 
+
 def sumSquare(input, start, end):
-    out = 0.0
-    for i in range(start,end):
-        out += input[i] * input[i]
+    return np.sum(input[start:end] * input[start:end])
 
-    return out
 
-def RMS(inputBuffers, blockSize):
-
-    rms = 0.0
-    for i in range(blockSize):
-        rms += inputBuffers[i] * inputBuffers[i]
-    rms /= blockSize
-    rms = np.sqrt(rms)
-
-    return rms
+def RMS(inputBuffers, axis=None):
+    ms = np.mean(inputBuffers * inputBuffers, axis=axis)
+    return np.sqrt(ms)
