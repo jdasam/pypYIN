@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 if __name__ == '__main__':
     with open('README.md') as fh:
@@ -20,5 +20,5 @@ if __name__ == '__main__':
 
           install_requires=['numpy',
                             'scipy',
-                            'essentia'],
+                            'librosa'],
           )

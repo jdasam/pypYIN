@@ -39,11 +39,26 @@
 
 from __future__ import absolute_import
 
+import librosa
+
 from . import pYINmain
-import essentia.standard as ess
 
 
-def pYINPtNote(filename1,fs=44100,frameSize=2048,hopSize=256):
+def frame_generator(audio, frameSize, hopSize):
+    if audio.ndim != 1:
+        raise Exception("Audio must be mono")
+
+    start_index = 0
+    end_index = min(frameSize, audio.size)
+
+    while start_index < audio.size:
+        yield audio[start_index:end_index]
+
+        start_index += hopSize
+        end_index = min(end_index + hopSize, audio.size)
+
+
+def pYINPtNote(filename1, fs=44100, frameSize=2048, hopSize=256):
 
     '''
     Given filename, return pitchtrack and note transcription track
@@ -59,7 +74,7 @@ def pYINPtNote(filename1,fs=44100,frameSize=2048,hopSize=256):
                    lowAmp = 0.25, onsetSensitivity = 0.7, pruneThresh = 0.1)
 
     # frame-wise calculation
-    audio = ess.MonoLoader(filename = filename1, sampleRate = fs)()
+    audio = librosa.load(filename1, fs)
 
     # rms mean
     # rms = []
@@ -68,7 +83,7 @@ def pYINPtNote(filename1,fs=44100,frameSize=2048,hopSize=256):
     # rmsMean = np.mean(rms)
     # print 'rmsMean', rmsMean
 
-    for frame in ess.FrameGenerator(audio, frameSize=frameSize, hopSize=hopSize):
+    for frame in frame_generator(audio, frameSize=frameSize, hopSize=hopSize):
         fs = pYinInst.process(frame)
 
     # calculate smoothed pitch and mono note
